@@ -18,8 +18,14 @@
     <div class="Player">
         <h1>Upload your music here!</h1>
         <input type="file" id="input">
+        <button onclick="clickFnct()">Upload music</button>
+        <p id="demo"></p>
     </div>
 
-    <div class="btn Upload">Upload</div>
+    <script>
+        function clickFnct() {
+          document.getElementById("demo").innerHTML = "Hello World";
+        }
+        </script>
 </body>
 </html>
