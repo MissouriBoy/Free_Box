@@ -1,0 +1,54 @@
+body {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+}
+
+.navbar{
+  background: #22ACEA;
+  height: 75px;
+}
+
+#links-section{
+  align-items: center;
+  display: flex;
+  float: right;
+  height: 100%;
+  justify-content: center;
+  width: 20%;
+}
+
+.link{
+  color: #FFFFFF;
+  font-family: Nunito;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
+  width: 120px;
+}
+
+.link:active{
+  background-color: #0073a8;
+}
+.link:hover{
+  font-weight: bold;
+}
+.selected{
+  background-color: #0073a8;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Nunito'); /* very important!! */
+
+#acm{
+  color: #FFFFFF;
+  font-family: Nunito;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: bold;
+  height: 50px;
+  line-height: 50%;
+  position: absolute;
+  width: 450px;
+  padding-left: 10px;
+}
