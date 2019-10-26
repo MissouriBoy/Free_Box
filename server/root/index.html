@@ -18,19 +18,28 @@
     <div class="Player">
         <h1>Upload your music here!</h1>
         <input type="file" id="input">
-        <button onclick="clickFnct()">Upload music</button>
+        <button onclick="uploadFnct()">Upload music</button>
         <p id="demo"></p>
     </div>
 
     <div class="AudioFunction">
-        <button onclick="clickFnct()">Play music</button>
-        <button onclick="clickFnct()">Pause music</button>
-        <button onclick="clickFnct()">Skip music</button>
+        <button onclick="playFnct()">Play music</button>
+        <button onclick="pauseFnct()">Pause music</button>
+        <button onclick="skipFnct()">Skip music</button>
     </div>
 
     <script>
-        function clickFnct() {
-          document.getElementById("demo").innerHTML = "Hello World";
+        function uploadFnct() {
+          document.getElementById("demo").innerHTML = "Music uploaded";
+        }
+        function playFnct() {
+          document.getElementById("demo").innerHTML = "Playing music";
+        }
+        function pauseFnct() {
+          document.getElementById("demo").innerHTML = "Paused music";
+        }
+        function skipFnct() {
+          document.getElementById("demo").innerHTML = "Skipped song";
         }
         </script>
 </body>
