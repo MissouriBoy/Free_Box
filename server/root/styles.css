@@ -52,3 +52,13 @@ body {
   width: 450px;
   padding-left: 10px;
 }
+
+.btn {
+  border: none; /* Remove borders */
+  color: white; /* Add a text color */
+  padding: 14px 28px; /* Add some padding */
+  cursor: pointer; /* Add a pointer cursor on mouse-over */
+}
+
+.upload {background-color: #4CAF50;} /* Green */
+.upload:hover {background-color: #46a049;}
