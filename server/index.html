@@ -27,7 +27,8 @@
 
     <script>
         function uploadFnct() {
-            document.getElementById("demo").innerHTML = "Music uploaded";
+            
+            document.getElementById("demo").innerHTML = document.getElementById("input").value;
             var xhttp = new XMLHttpRequest();
 
             xhttp.open("POST", "http://localhost:3001/file", true);
@@ -41,17 +42,10 @@
         }
         function skipFnct() {
             document.getElementById("demo").innerHTML = "Skipped song";
-            wait(3000);
+            //wait(3000);
             //document.getElementById("demo").innerHTML = "Playing music";
         }
-        function wait(ms){
-          document.getElementById("demo").innerHTML = "Skipped song";
-          var start = new Date().getTime();
-          var end = start;
-          while(end < start + ms) {
-            end = new Date().getTime();
-          }
-        }
+        
         </script>
 </body>
 </html>
