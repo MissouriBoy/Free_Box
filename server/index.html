@@ -18,12 +18,12 @@
     <div class="Player">
         <h1>Upload your music here!</h1>
         <input type="file" id="input">
-        <button onclick="uploadFnct()">Upload music</button>
+        <button onclick="sayFileName()">Upload music</button>
         <p id="demo"></p>
     </div>
 
     <div class="AudioFunction">
-        <button onclick="playFnct()">Play music</button>
+        <button onclick="playFnct('http://dev.interactive-creation-works.net/1/1.ogg')">Play music</button>
         <button onclick="pauseFnct()">Pause music</button>
         <button onclick="skipFnct()">Skip music</button>
     </div>
@@ -32,25 +32,17 @@
         function uploadFnct() {
           document.getElementById("demo").innerHTML = "Music uploaded";
         }
-        function playFnct() {
+        function playFnct(url) {
           document.getElementById("demo").innerHTML = "Playing music";
+          var a = new Audio(url);
+          a.play();
         }
         function pauseFnct() {
           document.getElementById("demo").innerHTML = "Paused music";
         }
         function skipFnct() {
           document.getElementById("demo").innerHTML = "Skipped song";
-          wait(3000);
-          /*document.getElementById("demo").innerHTML = "Playing music";
-        */}
-        function wait(ms){
-          document.getElementById("demo").innerHTML = "Skipped song";
-          var start = new Date().getTime();
-          var end = start;
-          while(end < start + ms) {
-            end = new Date().getTime();
-          }
-        }
+        }  
         </script>
 </body>
 </html>
