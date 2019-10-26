@@ -22,16 +22,26 @@ server.listen(port, '0.0.0.0', () => {
     console.log(`Server listening on port ${port}`);
 });
 
-function uploadFnct() {
-    const fileContent = fs.readFileSync($('#input').val());
+app.get('/POST', (req, res) => {
+    res.send("I love HackSchool.");
+    if (req.method === 'POST') {
+        
+    }
+});
+
+function uploadFnct(file) {
+    const fileContent = fs.readFileSync(file);
 
     const params = {
-        Bucket: freejukebox.space,
+        Bucket: "freejukebox.space",
         Key: 'Heh',
         Body: fileContent
     }
-}
 
-function sayFileName() {
-    console.log($('#input').val());
+    s3.upload(params, function(err, data) {
+        if (err) {
+            throw err;
+        }
+        console.log(`File uploaded successfully. ${data.Location}`);
+    });
 }
