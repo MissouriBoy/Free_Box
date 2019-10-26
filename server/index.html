@@ -15,7 +15,16 @@
     <div class="Player">
         <h2>Upload your music here!</h1>
         <input type="file" id="input">
+        <button onclick="uploadFnct()">Upload music</button>
         <p id="demo"></p>
     </div>
-</body>
+
+    <audio controls>
+        <source src="horse.ogg" type="audio/ogg">
+        <source src="horse.mp3" type="audio/mpeg">
+        <source src="horse.wav" type="audio/wav">
+        Your browser does not support the audio tag.
+    </audio>
+
+    </body>
 </html>
