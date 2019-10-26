@@ -36,19 +36,12 @@ app.get('/POST', (req, res) => {
     var file = __dirname + "/" + req.files.file.name;
     
     fs.readFile( req.files.file.path, function (err, data) {
-       fs.writeFile(file, data, function (err) {
-          if( err ) {
-             console.log( err );
-             } else {
-                response = {
-                   message:'File uploaded successfully',
-                   filename:req.files.file.name
-                };
-             }
-         
-          console.log( response );
-          res.end( JSON.stringify( response ) );
-       });
+			response = {
+				message:'File uploaded successfully',
+				filename:req.files.file.name
+			};
+			console.log( response );
+			res.end( JSON.stringify( response ) );
     });
 });
 
