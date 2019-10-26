@@ -6,7 +6,7 @@ if (window.XMLHttpRequest) {
     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 }
 
-function uploadFnct() {
+/*function uploadFnct() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -16,5 +16,5 @@ function uploadFnct() {
     };
 
     xhttp.open("POST", "http://localhost:3001/POST", true);
-    xhttp.send($(#input).value);
-}
+    xhttp.send(#input);
+}*/

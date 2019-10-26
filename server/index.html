@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <title>The Free Jukebox</title>
   <link type="text/css" rel="stylesheet" href="styles.css">
-  <script src="app.js" type="application/javascript"></script>
+  <script src="script.js" type="text/javascript"></script>
 </head>
 <body>
     <div class="navbar">
@@ -30,19 +30,23 @@
 
     <script>
         function uploadFnct() {
-          document.getElementById("demo").innerHTML = "Music uploaded";
+            document.getElementById("demo").innerHTML = "Music uploaded";
+            var xhttp = new XMLHttpRequest();
+
+            xhttp.open("POST", "http://localhost:3001/POST", true);
+            xhttp.send();
         }
         function playFnct() {
-          document.getElementById("demo").innerHTML = "Playing music";
+            document.getElementById("demo").innerHTML = "Playing music";
         }
         function pauseFnct() {
-          document.getElementById("demo").innerHTML = "Paused music";
+            document.getElementById("demo").innerHTML = "Paused music";
         }
         function skipFnct() {
-          document.getElementById("demo").innerHTML = "Skipped song";
-          wait(3000);
-          /*document.getElementById("demo").innerHTML = "Playing music";
-        */}
+            document.getElementById("demo").innerHTML = "Skipped song";
+            wait(3000);
+            //document.getElementById("demo").innerHTML = "Playing music";
+        }
         function wait(ms){
           document.getElementById("demo").innerHTML = "Skipped song";
           var start = new Date().getTime();
