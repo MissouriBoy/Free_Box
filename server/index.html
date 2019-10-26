@@ -15,37 +15,7 @@
     <div class="Player">
         <h2>Upload your music here!</h1>
         <input type="file" id="input">
-        <button onclick="uploadFnct()">Upload music</button>
         <p id="demo"></p>
     </div>
-
-    <div class="AudioFunction">
-        <button onclick="playFnct()">Play music</button>
-        <button onclick="pauseFnct()">Pause music</button>
-        <button onclick="skipFnct()">Skip music</button>
-    </div>
-
-    <script>
-        function uploadFnct() {
-            
-            document.getElementById("demo").innerHTML = document.getElementById("input").value;
-            var xhttp = new XMLHttpRequest();
-
-            xhttp.open("POST", "http://localhost:3001/file", true);
-            xhttp.send(document.getElementById("input").value);
-        }
-        function playFnct() {
-            document.getElementById("demo").innerHTML = "Playing music";
-        }
-        function pauseFnct() {
-            document.getElementById("demo").innerHTML = "Paused music";
-        }
-        function skipFnct() {
-            document.getElementById("demo").innerHTML = "Skipped song";
-            //wait(3000);
-            //document.getElementById("demo").innerHTML = "Playing music";
-        }
-        
-        </script>
 </body>
 </html>

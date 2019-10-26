@@ -52,16 +52,3 @@ body {
   width: 450px;
   padding-left: 10px;
 }
-
-.btn {
-  border: none; /* Remove borders */
-  color: black; /* Add a text color */
-  /*align-items: center;*/
-  padding: 14px 28px; /* Add some padding */
-  cursor: pointer; /* Add a pointer cursor on mouse-over */
-  width: 450px;
-  
-}
-
-.Upload {background-color: #4CAF50;} /* Green */
-.Upload:hover {background-color: #46a049;}
