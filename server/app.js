@@ -35,5 +35,3 @@ app.post('/setTime', async (req, res) => {
     };
     res.end( JSON.stringify( response ) );
 });
-
-
