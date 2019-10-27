@@ -17,5 +17,29 @@
         <input type="file" id="input">
         <p id="demo"></p>
     </div>
+
+    <audio
+        controls
+        id="player"
+        src="https://s3.us-east-2.amazonaws.com/freejukebox.space/Downforce.wav">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
+    <p id="time">Time:</p>
+    <script>
+        const audio = document.getElementById("player");
+
+        audio.addEventListener('playing', (event) => {
+            console.log('Video is no longer paused');
+        });
+
+        audio.addEventListener('pause', (event) => {
+            console.log('Video is paused');
+        });
+        
+        audio.addEventListener('seeked', (event) => {
+            console.log(document.getElementById("player").currentTime);
+        });
+    </script>
 </body>
 </html>
