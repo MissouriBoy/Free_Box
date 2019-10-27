@@ -18,7 +18,11 @@ wss.on('connection', function(ws) {
 
 function sendAll (message) {
     for (var i=0; i<CLIENTS.length; i++) {
-        CLIENTS[i].send(message);
+        let pie = {
+            identification: i,
+            message: message
+        }
+        CLIENTS[i].send(pie);
     }
 }
 
