@@ -38,13 +38,13 @@
 
         audio.addEventListener('playing', (event) => {
             console.log('Video is no longer paused');
-            play--;
+            play = 1;
             ws.send("Play");
         });
 
         audio.addEventListener('pause', (event) => {
             console.log('Video is paused');
-            pause--;
+            pause = 1;
             ws.send("Pause");
         });
         
@@ -67,16 +67,17 @@
                     console.log(received_msg);
 
                     if ( received_msg === "Play" ) {
-                        if( play < 0 ) {
+                        if( play === 0 ) {
                             audio.play();
-                            play++;
+                        } else {
+                            play = 0;
                         }
-                        
                     }
                     else if ( received_msg === "Pause" ) {
-                        if( pause < 0 ) {
+                        if( pause === 0 ) {
                             audio.pause();
-                            pause++;
+                        } else {
+                            pause = 0;
                         }
                     }
                     else {
