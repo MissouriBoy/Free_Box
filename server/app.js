@@ -2,6 +2,8 @@ const express = require('express');
 const http = require('http');
 const app = express();
 const server = http.createServer(app);
+let decipherId = 0;
+let clientId = 0;
 app.use(express.static(__dirname));
 
 var WebSocketServer = require('ws').Server,
@@ -9,17 +11,25 @@ var WebSocketServer = require('ws').Server,
     CLIENTS=[];
 
 wss.on('connection', function(ws) {
-    CLIENTS.append(ws);
-    document.getElementById("player").currentTime;
+    CLIENTS.push(ws);
+
+    console.log(clientId);
+    CLIENTS[clientId].send(clientId);
+    clientId++;
+
     ws.on('message', function(message) {
-        console.log('received: %s', message);
+        console.log(message);
+        decipherId = JSON.parse(message);
+        console.log('received: %s and %s', decipherId.identifier, decipherId.message);
         sendAll(message);
     });
 });
 
 function sendAll (message) {
     for (var i=0; i<CLIENTS.length; i++) {
-        CLIENTS[i].send(message);
+        if ( i != decipherId.identifier ) {
+            CLIENTS[i].send(decipherId.message);
+        }
     }
 }
 

@@ -19,7 +19,7 @@
     <audio
         controls
         id="player"
-        src="https://s3.us-east-2.amazonaws.com/freejukebox.space/Downforce.wav">
+        src="music.flac">
             Your browser does not support the
             <code>audio</code> element.
     </audio>
@@ -31,21 +31,22 @@
         var received_msg = "";
         var id = 0;
         var initialize = false;
+        var commandDisable = false;
+        var ws;
 
         const audio = document.getElementById("player");
         var ip = prompt("Please enter the ip address you want to connect to.", "localhost");
-
-        // Let us open a web socket
-        var ws = new WebSocket("ws://" + ip + ":8080");
 
         audio.addEventListener('playing', (event) => {
             var pie = { 
                 identifier: id,
                 message: "Play"
             }
-            console.log('Video is no longer paused');
-            play = 1;
-            ws.send(pie);
+
+            if ( commandDisable === false ) {
+                ws.send(JSON.stringify(pie));
+            }
+            commandDisable = false;
         });
 
         audio.addEventListener('pause', (event) => {
@@ -53,9 +54,11 @@
                 identifier: id,
                 message: "Pause"
             }
-            console.log('Video is paused');
-            pause = 1;
-            ws.send(pie);
+
+            if ( commandDisable === false ) {
+                ws.send(JSON.stringify(pie));
+            }
+            commandDisable = false;
         });
         
         audio.addEventListener('seeked', (event) => {
@@ -63,44 +66,43 @@
                 identifier: id,
                 message: document.getElementById("player").currentTime
             }
-            ws.send(document.getElementById("player").currentTime);
-            seek = 0;
+
+            if ( commandDisable === false ) {
+                ws.send(JSON.stringify(pie));
+            }
+            commandDisable = false;
         });
 
         // Universal volume control (If you want)
         
         function WebSocketTest() {
             
-            if ( "WebSocket" in window ) {             
-                ws.onopen = function() {  
+            if ( "WebSocket" in window ) {    
+                
+                ws = new WebSocket("ws://" + ip + ":8080");
 
+                ws.onopen = function() {
+                    
                 };
 				
-                ws.onmessage = function (evt) { 
+                ws.onmessage = function async (evt) { 
                     received_msg = evt.data;
                     console.log(received_msg);
                     if( initialize === true ) {
+                        commandDisable = true;
+
                         if ( received_msg === "Play" ) {
-                            if( play === 0 ) {
-                                audio.play();
-                            } else {
-                                play = 0;
-                            }
+                            audio.play();
                         }
                         else if ( received_msg === "Pause" ) {
-                            if( pause === 0 ) {
-                                audio.pause();
-                            } else {
-                                pause = 0;
-                            }
+                            audio.pause();
                         }
                         else {
-                            console.log(received_msg);
-                            stopSeek();
-                            seek++;
+                            audio.currentTime = parseFloat(received_msg);
                         }
                     } else {
                         id = parseInt(received_msg);
+                        alert( "Your ID is " + id );
                         initialize = true;
                     }
                 };
@@ -113,12 +115,6 @@
               
                 // The browser doesn't support WebSocket
                 alert("WebSocket NOT supported by your Browser!");
-            }
-        }
-        
-        function stopSeek() {
-            if ( seek <= 0 ) {
-                audio.currentTime = parseFloat(received_msg);
             }
         }
 
