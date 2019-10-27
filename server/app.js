@@ -10,6 +10,7 @@ var WebSocketServer = require('ws').Server,
 
 wss.on('connection', function(ws) {
     CLIENTS.append(ws);
+    document.getElementById("player").currentTime;
     ws.on('message', function(message) {
         console.log('received: %s', message);
         sendAll(message);
@@ -18,11 +19,7 @@ wss.on('connection', function(ws) {
 
 function sendAll (message) {
     for (var i=0; i<CLIENTS.length; i++) {
-        let pie = {
-            identification: i,
-            message: message
-        }
-        CLIENTS[i].send(pie);
+        CLIENTS[i].send(message);
     }
 }
 
