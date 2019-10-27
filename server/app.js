@@ -9,7 +9,7 @@ var WebSocketServer = require('ws').Server,
     CLIENTS=[];
 
 wss.on('connection', function(ws) {
-    CLIENTS.push(ws);
+    CLIENTS.append(ws);
     ws.on('message', function(message) {
         console.log('received: %s', message);
         sendAll(message);
