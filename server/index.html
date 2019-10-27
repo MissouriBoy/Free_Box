@@ -23,20 +23,20 @@
             Your browser does not support the
             <code>audio</code> element.
     </audio>
-    <p id="time">Time:</p>
+    
     <script>
-        var pause = 0;
-        var play = 0;
-        var seek = 0;
-        var received_msg = "";
-        var id = 0;
-        var initialize = false;
-        var commandDisable = false;
-        var ws;
+        var received_msg = "";          // stores the message sent from server to perform on
+        var id = 0;                     // stores the id of the client
+        var initialize = false;         // to ensure each user connected gets a unique id
+        var commandDisable = false;     // buffer to prevent inputs looping from server and clients
+                                        // interacting with each other 
+        var ws;                         // websocket object for server client 
+                                        // communication
 
         const audio = document.getElementById("player");
         var ip = prompt("Please enter the ip address you want to connect to.", "localhost");
 
+        // actionlistener which keeps track when the play button is clicked
         audio.addEventListener('playing', (event) => {
             var pie = { 
                 identifier: id,
@@ -49,6 +49,7 @@
             commandDisable = false;
         });
 
+        // actionlistener which keeps track when the pause button is clicked
         audio.addEventListener('pause', (event) => {
             var pie = { 
                 identifier: id,
@@ -61,6 +62,8 @@
             commandDisable = false;
         });
         
+        // actionlistener which keeps track of the timestamp on the song being played
+        // triggered when a client manually changes the timestamp
         audio.addEventListener('seeked', (event) => {
             var pie = { 
                 identifier: id,
@@ -86,11 +89,17 @@
                 };
 				
                 ws.onmessage = function async (evt) { 
+                    // take the event and take the enclosed data for further inspection
                     received_msg = evt.data;
                     console.log(received_msg);
+
+                    // checks if the message is user first connecting or firing of a listener
                     if( initialize === true ) {
+                        // variable used for buffering input changes
                         commandDisable = true;
 
+                        // deciphers which action was made to perform the same
+                        // action to the rest of the users
                         if ( received_msg === "Play" ) {
                             audio.play();
                         }
@@ -101,6 +110,8 @@
                             audio.currentTime = parseFloat(received_msg);
                         }
                     } else {
+                        // First message server will recieve is connection by user
+                        // so create the user and allow for listener interaction
                         id = parseInt(received_msg);
                         alert( "Your ID is " + id );
                         initialize = true;
@@ -117,7 +128,7 @@
                 alert("WebSocket NOT supported by your Browser!");
             }
         }
-
+        // Recursive calling required for maintaining the function
         WebSocketTest()
     </script>
 </body>
